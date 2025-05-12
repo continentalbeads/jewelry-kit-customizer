@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Build Your Own Jewelry Kit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 2rem; }
+    h1 { text-align: center; }
+    section { margin-bottom: 2rem; }
+    label { display: block; margin: 0.5rem 0; }
+    select, input[type="checkbox"] { margin-right: 0.5rem; }
+    .preview { border-top: 1px solid #ccc; padding-top: 1rem; margin-top: 2rem; }
+    .section-title { font-weight: bold; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h1>Build Your Own Jewelry Kit</h1>
+  <form id="kitForm">
+    <section>
+      <h2 class="section-title">1. Choose Your Base</h2>
+      <label><input type="radio" name="base" value="Bracelet" required> Bracelet</label>
+      <label><input type="radio" name="base" value="Necklace"> Necklace</label>
+      <label><input type="radio" name="base" value="Earrings"> Earrings</label>
+    </section>
+
+    <section>
+      <h2 class="section-title">2. Select Your Chain</h2>
+      <select name="chain" required>
+        <option value="">-- Select a Chain --</option>
+        <option value="CH123 - 2mm Rolo Chain">CH123 - 2mm Rolo Chain</option>
+        <option value="CH456 - Snake Chain">CH456 - Snake Chain</option>
+      </select>
+    </section>
+
+    <section>
+      <h2 class="section-title">3. Pick Up to 3 Beads</h2>
+      <label><input type="checkbox" name="beads" value="BD001 - 6mm Glass Round"> BD001 - 6mm Glass Round</label>
+      <label><input type="checkbox" name="beads" value="BD002 - 4mm Faceted Crystal"> BD002 - 4mm Faceted Crystal</label>
+      <label><input type="checkbox" name="beads" value="BD003 - Pearl Coated Round"> BD003 - Pearl Coated Round</label>
+    </section>
+
+    <section>
+      <h2 class="section-title">4. Choose 1–2 Charms</h2>
+      <label><input type="checkbox" name="charms" value="CHM001 - Heart Charm"> CHM001 - Heart Charm</label>
+      <label><input type="checkbox" name="charms" value="CHM002 - Star Charm"> CHM002 - Star Charm</label>
+    </section>
+
+    <section>
+      <h2 class="section-title">5. Select Findings</h2>
+      <label><input type="checkbox" name="findings" value="FN001 - Lobster Clasp"> FN001 - Lobster Clasp</label>
+      <label><input type="checkbox" name="findings" value="FN002 - Jump Rings"> FN002 - Jump Rings</label>
+    </section>
+
+    <div style="text-align:center;">
+      <button type="submit">Build My Kit</button>
+    </div>
+  </form>
+
+  <div class="preview" id="preview" style="display:none;">
+    <h2>Your Custom Jewelry Kit</h2>
+    <p><strong>Base:</strong> <span id="previewBase"></span></p>
+    <p><strong>Chain:</strong> <span id="previewChain"></span></p>
+    <p><strong>Beads:</strong> <span id="previewBeads"></span></p>
+    <p><strong>Charms:</strong> <span id="previewCharms"></span></p>
+    <p><strong>Findings:</strong> <span id="previewFindings"></span></p>
+  </div>
+
+  <script>
+    document.getElementById('kitForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      document.getElementById('previewBase').textContent = form.get('base');
+      document.getElementById('previewChain').textContent = form.get('chain');
+      document.getElementById('previewBeads').textContent = [...form.getAll('beads')].join(', ');
+      document.getElementById('previewCharms').textContent = [...form.getAll('charms')].join(', ');
+      document.getElementById('previewFindings').textContent = [...form.getAll('findings')].join(', ');
+      document.getElementById('preview').style.display = 'block';
+    });
+  </script>
+</body>
+</html>
